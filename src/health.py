@@ -148,8 +148,8 @@ def check_production_model() -> HealthCheckResult:
                 issues.append("Model lacks predict() method")
         except PermissionError:
             issues.append("Permission denied reading model file")
-        except (EOFError, pickle.UnpicklingError) as e:
-            issues.append(f"Model file corrupted: {type(e).__name__}")
+        except (EOFError, pickle.UnpicklingError, KeyError, ModuleNotFoundError) as e:
+            issues.append(f"Model file incompatible: {type(e).__name__}")
         except (OSError, IOError) as e:
             issues.append(f"Model I/O error: {e}")
 
@@ -210,11 +210,13 @@ def check_preprocessing_pipeline() -> HealthCheckResult:
             message="Permission denied reading pipeline file",
             details={"path": str(pipeline_path)}
         )
-    except (EOFError, pickle.UnpicklingError) as e:
+    except (EOFError, pickle.UnpicklingError, KeyError, ModuleNotFoundError) as e:
+        # KeyError can occur with pickle protocol version mismatches
+        # ModuleNotFoundError if pickle references unavailable modules
         return HealthCheckResult(
             name="preprocessing_pipeline",
             passed=False,
-            message=f"Pipeline file corrupted: {type(e).__name__}",
+            message=f"Pipeline file incompatible: {type(e).__name__}",
             details={"error": str(e), "path": str(pipeline_path)}
         )
     except (OSError, IOError) as e:

@@ -38,9 +38,10 @@ env/
 ehthumbs.db
 Thumbs.db
 
-# Models - production artifacts committed for portfolio reproducibility
-# models/*.pkl  # Uncomment to exclude large models
-# models/*.joblib
+# Models - binary files excluded (not portable across Python/sklearn versions)
+# Run `make pipeline` to generate these locally
+models/*.pkl
+models/*.joblib
 
 # Reports and figures
 reports/*.png
