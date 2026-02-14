@@ -1,30 +1,19 @@
 """
 SECOM Yield Prediction - Source Package
+
+Submodules should be imported directly to avoid circular imports:
+    from src.config import RANDOM_STATE
+    from src.data import load_labels
+    from src.evaluation import calculate_gmean
 """
 
-from . import config
-from . import mlflow_utils
-from . import health
-
-# Subpackages
-from . import data
-from . import models
-from . import evaluation
-from . import visualization
-
-# Standalone modules
-from . import tuning_utils
-
 __all__ = [
-    # Core
     'config',
-    'mlflow_utils',
-    'health',
-    # Subpackages
     'data',
-    'models',
     'evaluation',
-    'visualization',
-    # Standalone modules
+    'health',
+    'mlflow_utils',
+    'models',
     'tuning_utils',
+    'visualization',
 ]
