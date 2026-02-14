@@ -1,0 +1,9 @@
+{
+  "optimal_threshold": 0.54,
+  "model_name": "SVM",
+  "feature_set": "lasso",
+  "n_features": 8,
+  "sampling_strategy": "adasyn",
+  "cv_gmean": 0.7099771491113804,
+  "cost_ratio": 1.0
+}

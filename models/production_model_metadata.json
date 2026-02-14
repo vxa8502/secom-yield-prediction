@@ -1,0 +1,19 @@
+{
+  "optimal_threshold": 0.54,
+  "model_name": "SVM",
+  "feature_set": "lasso",
+  "n_features": 8,
+  "sampling_strategy": "adasyn",
+  "cv_gmean": 0.7099771491113804,
+  "cost_ratio": 1.0,
+  "test_gmean": 0.72183560726355,
+  "test_sensitivity": 0.6666666666666666,
+  "test_specificity": 0.7815699658703071,
+  "test_precision": 0.1794871794871795,
+  "test_f1_score": 0.2828282828282828,
+  "test_accuracy": 0.7738853503184714,
+  "test_auc_roc": 0.7830326669917113,
+  "test_auc_pr": 0.1788962406512554,
+  "training_time_seconds": 0.5114669799804688,
+  "timestamp": "2026-02-14T05:53:48.195234"
+}

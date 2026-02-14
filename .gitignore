@@ -1,0 +1,66 @@
+# Personal notes and session docs (not for repo)
+personal/
+
+# Data (too large for git, regenerated from pipelines)
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Models - production artifacts committed for portfolio reproducibility
+# models/*.pkl  # Uncomment to exclude large models
+# models/*.joblib
+
+# Reports and figures
+reports/*.png
+reports/*.csv
+reports/*.txt
+figures/*.png
+
+# MLflow tracking
+mlruns/
+mlflow.db
+notebooks/mlruns/
+notebooks/mlflow.db
+
+# Optuna studies (persistent hyperparameter tuning)
+optuna_studies.db
+
+# Generated outputs
+all_raw_output.txt
+modeling_pipeline_output.txt
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/

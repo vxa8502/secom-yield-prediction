@@ -1,0 +1,23 @@
+{
+  "overall": {
+    "mean": -0.34384795845278393,
+    "std": 0.26738915372363103,
+    "median": -0.3333379322844252,
+    "skewness": 1.1899311777832913,
+    "kurtosis": 3.2420706461719204
+  },
+  "passes": {
+    "mean": -0.3972887704141785,
+    "std": 0.17869569554000317,
+    "n_samples": 293
+  },
+  "failures": {
+    "mean": 0.4017786084371493,
+    "std": 0.16647632141835686,
+    "n_samples": 21
+  },
+  "interpretation": {
+    "pass_bias": "underconfident",
+    "fail_bias": "underconfident"
+  }
+}
