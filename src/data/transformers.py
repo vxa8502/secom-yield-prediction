@@ -128,7 +128,6 @@ class VIFReducer(BaseEstimator, TransformerMixin):
         # Identify high-VIF features
         high_vif = self.vif_data_[self.vif_data_['vif'] > self.vif_threshold]
         high_vif_features = high_vif['feature'].tolist()
-        low_vif_features = [f for f in self.vif_data_['feature'] if f not in high_vif_features]
         self.n_high_vif_ = len(high_vif_features)
 
         logger.info(f"  [shared] VIF: {self.n_high_vif_} features with VIF > {self.vif_threshold}")
