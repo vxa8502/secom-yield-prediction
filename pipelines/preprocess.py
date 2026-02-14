@@ -120,7 +120,7 @@ def load_raw_data() -> tuple[pd.DataFrame, pd.DataFrame]:
             f"Expected: {expected_labels}"
         )
 
-    y['target'] = y['label'].map({-1: 0, 1: 1, -1.0: 0, 1.0: 1})
+    y['target'] = y['label'].map({-1: 0, 1: 1})
 
     # Replace NaN indicator (-9999 or similar) with actual NaN
     X = X.replace({-9999.0: np.nan, -999.0: np.nan})

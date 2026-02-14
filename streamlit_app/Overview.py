@@ -13,7 +13,6 @@ if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 

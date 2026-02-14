@@ -7,7 +7,6 @@ Uses fixtures with minimal data to keep tests fast.
 
 from __future__ import annotations
 
-import json
 import os
 import shutil
 import subprocess
@@ -15,7 +14,7 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Generator
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd

@@ -1,0 +1,16 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = [
+    "E501",  # Line too long (handled by formatter)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]  # Allow imports after sys.path manipulation
+"notebooks/*" = ["E402", "F401"]  # Notebooks have different patterns
+"streamlit_app/*" = ["E402"]  # Streamlit apps manipulate path
+"pipelines/*" = ["E402"]  # Pipeline scripts manipulate path
+"*/__init__.py" = ["F401"]  # Re-exports in __init__.py files

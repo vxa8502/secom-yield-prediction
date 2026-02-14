@@ -3,7 +3,6 @@ Unit tests for actionable recommendations module.
 """
 
 import pandas as pd
-import pytest
 
 from streamlit_app.utils.recommendations import (
     generate_recommendations,

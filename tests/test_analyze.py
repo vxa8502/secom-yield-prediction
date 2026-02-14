@@ -2,10 +2,9 @@
 Unit tests for interpretability analysis pipeline.
 """
 
-import json
 import tempfile
 from pathlib import Path
-from unittest.mock import MagicMock, patch, PropertyMock
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd

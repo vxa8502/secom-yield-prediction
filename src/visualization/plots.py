@@ -10,7 +10,6 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from numpy.typing import ArrayLike, NDArray
 from sklearn.metrics import (

@@ -4,7 +4,6 @@ Unit tests for model validation CI gate.
 
 import json
 import pytest
-from pathlib import Path
 
 from pipelines.validate_model import (
     validate_model_performance,

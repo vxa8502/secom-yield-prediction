@@ -10,7 +10,6 @@ from collections import Counter
 from typing import Any, Callable
 
 from numpy.typing import ArrayLike, NDArray
-import numpy as np
 import optuna
 from optuna.samplers import TPESampler
 from sklearn.model_selection import cross_val_score
@@ -140,7 +139,7 @@ def create_objective(
             trial.set_user_attr('cv_std', 0.0)
             trial.set_user_attr('failed', True)
             trial.set_user_attr('failure_reason', 'insufficient_minority_samples')
-            raise optuna.TrialPruned(f"Resampling infeasible: insufficient minority samples")
+            raise optuna.TrialPruned("Resampling infeasible: insufficient minority samples")
 
         try:
             cv_scores = cross_val_score(pipeline, X_train, y_train, cv=cv, scoring=gmean_scorer, n_jobs=cv_n_jobs)

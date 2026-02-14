@@ -9,10 +9,9 @@ from __future__ import annotations
 
 import logging
 import sys
-from concurrent.futures import ProcessPoolExecutor, Future
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
-from typing import Any
-from unittest.mock import patch, MagicMock, PropertyMock
+from unittest.mock import patch, MagicMock
 
 import numpy as np
 import pytest
@@ -56,7 +55,7 @@ class TestParallelExecution:
             mock_executor.return_value.__exit__ = MagicMock(return_value=False)
 
             # Simulate creating executor with max_workers=len(strategies)
-            with ProcessPoolExecutor(max_workers=len(strategies)) as executor:
+            with ProcessPoolExecutor(max_workers=len(strategies)) as _:
                 pass
 
             # In actual code, max_workers should equal len(strategies)
@@ -123,7 +122,7 @@ class TestWorkerFailureRecovery:
 
         for strategy in strategies:
             try:
-                result = mock_result(strategy)
+                mock_result(strategy)
             except Exception as e:
                 failures.append((strategy, e))
 

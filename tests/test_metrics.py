@@ -3,7 +3,6 @@ Unit tests for evaluation metrics.
 """
 
 import numpy as np
-import pytest
 from src.evaluation.metrics import calculate_gmean, gmean_scorer_func, evaluate_model
 
 

@@ -32,7 +32,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from src.config import VIZ_CONFIG, MODELS_DIR, REPORTS_DIR, FIGURES_DIR, DATA_DIR, setup_logging, ensure_directories, DEFAULT_COST_RATIO
-from src.data import load_labels, load_features, load_all_feature_sets
+from src.data import load_labels, load_all_feature_sets
 from src.evaluation import evaluate_model, benchmark_prediction_latency, find_optimal_threshold_cv
 from src.visualization import (
     plot_confusion_matrix,

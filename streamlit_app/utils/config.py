@@ -12,7 +12,6 @@ from streamlit_app import setup_project_path
 setup_project_path()
 
 # Import colors from single source of truth
-from src.config import COLORS
 
 # Feature descriptions for UI display
 # Human-readable labels for anonymized SECOM features

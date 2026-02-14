@@ -325,7 +325,6 @@ if model_info['available']:
         with st.spinner("Computing SHAP values (this may take a moment)..."):
             try:
                 import shap
-                from streamlit_shap import st_shap
 
                 model = load_production_model()
                 model_type = get_model_type(model)
@@ -358,7 +357,6 @@ if model_info['available']:
     # Display SHAP visualizations if computed
     if st.session_state.shap_computed and st.session_state.shap_values is not None:
         import shap
-        from streamlit_shap import st_shap
 
         shap_values = st.session_state.shap_values
         X_explain = st.session_state.shap_X_explain

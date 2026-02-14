@@ -4,7 +4,6 @@ Unit tests for preprocessing transformers.
 
 import numpy as np
 import pandas as pd
-import pytest
 import pickle
 import tempfile
 from sklearn.impute import SimpleImputer

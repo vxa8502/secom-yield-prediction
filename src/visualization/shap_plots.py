@@ -17,7 +17,7 @@ import shap
 from numpy.typing import NDArray
 from sklearn.base import BaseEstimator
 
-from ..config import RANDOM_STATE, VIZ_CONFIG, SHAP_MAX_DISPLAY
+from ..config import RANDOM_STATE, SHAP_MAX_DISPLAY
 from .plots import finalize_figure
 
 logger = logging.getLogger('secom')

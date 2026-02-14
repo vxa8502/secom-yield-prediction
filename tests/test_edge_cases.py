@@ -10,8 +10,6 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 import pytest
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
 
 from src.evaluation.metrics import (
     calculate_gmean,

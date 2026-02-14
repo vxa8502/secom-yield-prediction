@@ -3,7 +3,6 @@ Unit tests for visualization utilities.
 """
 
 import numpy as np
-import pytest
 import tempfile
 from pathlib import Path
 

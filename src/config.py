@@ -411,7 +411,7 @@ def ensure_directories(create: bool = True) -> dict[str, Path]:
 DEFAULT_CLASS_IMBALANCE_RATIO = 14
 
 
-def compute_class_ratio(y: "ArrayLike") -> float:
+def compute_class_ratio(y: Any) -> float:
     """
     Compute class imbalance ratio from labels.
 

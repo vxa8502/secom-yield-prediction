@@ -9,11 +9,9 @@ from __future__ import annotations
 import json
 import logging
 import sys
-import tempfile
 from io import StringIO
 from pathlib import Path
 
-import pytest
 
 # Add project root to path
 project_root = Path(__file__).parent.parent

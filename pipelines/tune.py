@@ -54,6 +54,8 @@ from src.tuning_utils import (
 )
 from src.mlflow_utils import setup_mlflow
 
+logger = logging.getLogger('secom')
+
 
 def run_tuning_for_strategy(
     sampling_strategy: str,

@@ -4,9 +4,6 @@ Unit tests for SHAP explainability utilities.
 
 import numpy as np
 import pytest
-import tempfile
-from pathlib import Path
-from unittest.mock import MagicMock, patch
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier

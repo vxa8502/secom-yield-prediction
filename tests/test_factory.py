@@ -74,7 +74,7 @@ class TestBuildModel:
         assert isinstance(model, SVC)
         assert model.C == 1.0
         assert model.kernel == 'rbf'
-        assert model.probability == True  # Should always be True
+        assert model.probability is True  # Should always be True
 
     def test_class_balancing_applied(self):
         """Test that class balancing params are applied when requested."""

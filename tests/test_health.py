@@ -2,8 +2,6 @@
 Unit tests for health check module.
 """
 
-import pytest
-from pathlib import Path
 
 from src.health import (
     HealthCheckResult,
