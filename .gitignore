@@ -2,7 +2,8 @@
 personal/
 
 # Data (too large for git, regenerated from pipelines)
-data/
+# Use /data/ to only match top-level, not src/data/
+/data/
 
 # Python
 __pycache__/
