@@ -1,13 +1,12 @@
 # Semiconductor Yield Prediction
 
-> **Predicts semiconductor wafer defects with 72% G-Mean on 14:1 imbalanced manufacturing data, reducing downstream yield loss through early FDC-based fault detection.**
+> **Predicts semiconductor wafer defects with 72.2% G-Mean on 14:1 imbalanced manufacturing data, reducing downstream yield loss through early FDC-based fault detection.**
 
-<!-- Model performance visualization -->
 <p align="center">
-  <img src="reports/figures/confusion_matrix.png" alt="Confusion Matrix" width="500"/>
+  <img src="reports/figures/dashboard_preview.png" alt="Dashboard Preview" width="800"/>
 </p>
 
-<p align="center"><em>Production model confusion matrix: 14 defects caught, 7 missed, 64 false alarms</em></p>
+<p align="center"><em>Interactive dashboard: Real-time wafer prediction with actionable recommendations</em></p>
 
 ---
 
@@ -35,7 +34,7 @@ This system predicts wafer failures in real-time using machine learning, enablin
 
 | Metric | Value | What It Means |
 |--------|-------|---------------|
-| **G-Mean** | 72% | Balanced detection of both failures and passes |
+| **G-Mean** | 72.2% | Balanced detection of both failures and passes |
 | **AUC-ROC** | 78% | Strong discrimination between good and bad wafers |
 | **Feature Reduction** | 590 to 8 | Only 8 critical sensors needed for prediction |
 | **Inference Time** | 0.1ms | Fast enough for real-time production use |

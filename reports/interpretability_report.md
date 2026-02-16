@@ -20,7 +20,8 @@
 |      5 |          239 |            1 |                 0 |          0.446438 | false_negative |               0.0935624 |
 
 **Key Observations:**
-- 5 false negatives analyzed with SHAP waterfall plots
+- 7 total false negatives (missed defects out of 21 actual failures)
+- Top 5 analyzed with SHAP waterfall plots (closest to threshold)
 - Waterfall plots saved to `reports/figures/misclassification/`
 - See individual plots for feature-level attribution of each missed defect
 

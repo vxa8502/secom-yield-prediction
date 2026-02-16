@@ -24,17 +24,17 @@ print(f"Loaded model with threshold={OPTIMAL_THRESHOLD:.3f}, features={FEATURE_S
 # Load appropriate preprocessor based on feature set
 preprocessor = joblib.load(f'models/preprocessing_pipeline_{FEATURE_SET}.pkl')
 
-# Example: Predict single wafer
+# Example: Predict single wafer (8 LASSO-selected features)
+# Listed in SHAP importance order (most to least important)
 sensor_readings = {
-    'feature_21': 2.5,
-    'feature_59': -1.3,
-    'feature_64': 0.8,
-    'feature_75': 1.2,
-    'feature_103': -0.5,
-    'feature_114': 0.1,
-    'feature_129': 3.1,
-    'feature_510': 0.2,
-    # 8 LASSO-selected features (or all 590 if using 'all' feature set)
+    'feature_59': -1.3,    # Rank 1: Highest SHAP impact
+    'feature_129': 3.1,    # Rank 2
+    'feature_103': -0.5,   # Rank 3
+    'feature_21': 2.5,     # Rank 4
+    'feature_64': 0.8,     # Rank 5
+    'feature_510': 0.2,    # Rank 6
+    'feature_75': 1.2,     # Rank 7
+    'feature_114': 0.1,    # Rank 8: Lowest SHAP impact
 }
 
 # Convert to DataFrame
@@ -188,7 +188,7 @@ Based on production model evaluation:
 - **Throughput:** ~9,800 predictions/second (batch mode)
 - **Sensitivity:** 66.7% (catches 2/3 of actual failures)
 - **Specificity:** 78.2% (correctly identifies passing wafers)
-- **G-Mean:** 72.2% (balanced metric for imbalanced data)
+- **G-Mean:** 72.2% (test set; CV G-Mean: 71.0%)
 - **AUC-ROC:** 78.3%
 - **Memory:** ~10 MB (model + preprocessor loaded in RAM)
 

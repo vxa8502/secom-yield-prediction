@@ -62,10 +62,10 @@ For SECOM's snapshot-based quality classification, tree-based methods are the co
 |-------|-------------|----------|-----------|
 | **SVM (RBF)** | LASSO | ADASYN | **71.0%** |
 | LogReg | LASSO | native | 69.7% |
-| LogReg | LASSO | ADASYN | 69.5% |
-| SVM (linear) | LASSO | native | 68.8% |
+| LogReg | LASSO | ADASYN | 69.3% |
+| SVM (linear) | LASSO | native | 69.0% |
 
-SVM with RBF kernel and ADASYN resampling achieved the highest CV G-Mean on LASSO-selected features (8 features).
+SVM with RBF kernel and ADASYN resampling achieved the highest CV G-Mean (71.0%) on LASSO-selected features (8 features).
 
 ### Why SVM Performed Best
 
@@ -213,7 +213,7 @@ ADASYN with SVM (RBF kernel) proved most effective for this dataset.
 - 24 of 36 experiments completed; LASSO feature set completed for all samplers
 - ADASYN outperformed native class weighting by ~2% G-Mean
 - Park et al. (2024) benchmark: 72.95% G-Mean with SVM+ADASYN+MaxAbs
-- Our result: **72.18% Test G-Mean** (98% of benchmark)
+- Our result: **72.2% Test G-Mean** (99% of benchmark)
 
 ---
 

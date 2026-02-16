@@ -176,16 +176,16 @@ Features removed if they were near-duplicates of other features. The feature wit
 582 features received zero coefficients from L1 regularization, indicating they provided no additional predictive power beyond the 8 selected features.
 
 **Selected Features (ranked by SHAP importance):**
-| Feature | Mean SHAP | Reason for Selection |
-|---------|--------------|---------------------|
-| feature_59 | 0.0597 | Highest impact on predictions |
-| feature_129 | 0.0480 | Non-zero LASSO coefficient |
-| feature_103 | 0.0448 | Non-zero LASSO coefficient |
-| feature_21 | 0.0378 | Non-zero LASSO coefficient |
-| feature_64 | 0.0357 | Non-zero LASSO coefficient |
-| feature_510 | 0.0215 | Non-zero LASSO coefficient |
-| feature_75 | 0.0196 | Non-zero LASSO coefficient |
-| feature_114 | 0.0036 | Lowest impact but still selected |
+| Rank | Feature | Mean SHAP | Reason for Selection |
+|------|---------|-----------|----------------------|
+| 1 | feature_59 | 0.0597 | Highest impact on predictions |
+| 2 | feature_129 | 0.0480 | Non-zero LASSO coefficient |
+| 3 | feature_103 | 0.0448 | Non-zero LASSO coefficient |
+| 4 | feature_21 | 0.0378 | Non-zero LASSO coefficient |
+| 5 | feature_64 | 0.0357 | Non-zero LASSO coefficient |
+| 6 | feature_510 | 0.0215 | Non-zero LASSO coefficient |
+| 7 | feature_75 | 0.0196 | Non-zero LASSO coefficient |
+| 8 | feature_114 | 0.0036 | Lowest impact but still selected |
 
 Semantic interpretation not possible due to anonymization.
 

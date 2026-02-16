@@ -304,9 +304,12 @@ def load_test_data() -> tuple[np.ndarray, np.ndarray] | tuple[None, None]:
     return X_test, y_test
 
 
-def load_test_sample(n_samples=5):
+def load_test_sample(n_samples=None):
     """
     Load sample rows from test set for example predictions.
+
+    Args:
+        n_samples: Number of samples to load (None = all samples)
 
     Returns:
         DataFrame with test samples or None if not available
@@ -323,11 +326,13 @@ def load_test_sample(n_samples=5):
     df = pd.DataFrame(X_test, columns=lasso_features)
     df['actual_label'] = y_test
 
-    # Sample balanced examples
-    pass_samples = df[df['actual_label'] == 0].head(n_samples // 2 + 1)
-    fail_samples = df[df['actual_label'] == 1].head(n_samples // 2 + 1)
+    # Return all samples by default, or limited subset if specified
+    if n_samples is not None:
+        pass_samples = df[df['actual_label'] == 0].head(n_samples // 2 + 1)
+        fail_samples = df[df['actual_label'] == 1].head(n_samples // 2 + 1)
+        return pd.concat([pass_samples, fail_samples]).head(n_samples)
 
-    return pd.concat([pass_samples, fail_samples]).head(n_samples)
+    return df
 
 
 @st.cache_data
