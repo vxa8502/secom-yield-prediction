@@ -428,112 +428,72 @@ def analyze_fn_clusters(
 
 def _report_header(metadata: dict) -> str:
     """Generate report header section."""
-    return f"""# Interpretability Analysis Report
-## SECOM Semiconductor Defect Prediction
+    return f"""# Interpretability Report
 
-**Model:** {metadata['model_name']} with {metadata['feature_set']} features
-**Threshold:** {metadata['optimal_threshold']:.3f}
-**Test G-Mean:** {metadata['test_gmean']:.4f}
-
----"""
+**{metadata['model_name']} + {metadata['feature_set']} | Threshold: {metadata['optimal_threshold']:.2f} | G-Mean: {metadata['test_gmean']:.1%}**"""
 
 
-def _report_misclassification(fn_df: pd.DataFrame) -> str:
+def _report_misclassification(fn_df: pd.DataFrame, n_total_failures: int = 21) -> str:
     """Generate misclassification analysis section."""
-    table = fn_df.to_markdown(index=False) if len(fn_df) > 0 else "No false negatives in test set."
+    if len(fn_df) == 0:
+        return "\n\n## False Negatives\n\nNone in test set."
+
+    top3 = fn_df.head(3)[['test_index', 'predicted_proba', 'distance_to_threshold']]
+    top3.columns = ['test_idx', 'prob', 'gap']
+    table = top3.to_markdown(index=False)
+
     return f"""
-## Misclassification Analysis
 
-### False Negative Summary (Missed Defects)
+## False Negatives
 
-{table}
+{len(fn_df)}/{n_total_failures} failures missed. SHAP waterfalls: `reports/figures/misclassification/`
 
-**Key Observations:**
-- {len(fn_df)} false negatives analyzed with SHAP waterfall plots
-- Waterfall plots saved to `reports/figures/misclassification/`
-- See individual plots for feature-level attribution of each missed defect
-
----"""
+{table}"""
 
 
 def _report_residuals(residual_analysis: dict) -> str:
     """Generate residual distribution analysis section."""
     overall = residual_analysis['overall']
-    passes = residual_analysis['passes']
-    failures = residual_analysis['failures']
     interp = residual_analysis['interpretation']
 
+    if interp['pass_bias'] == interp['fail_bias']:
+        calibration = interp['pass_bias']
+    else:
+        calibration = f"passes {interp['pass_bias']}, failures {interp['fail_bias']}"
+
     return f"""
-## Residual Distribution Analysis
 
-| Metric | Overall | Passes | Failures |
-|--------|---------|--------|----------|
-| Mean | {overall['mean']:.4f} | {passes['mean']:.4f} | {failures['mean']:.4f} |
-| Std | {overall['std']:.4f} | {passes['std']:.4f} | {failures['std']:.4f} |
-| N | {passes['n_samples'] + failures['n_samples']} | {passes['n_samples']} | {failures['n_samples']} |
+## Calibration
 
-**Calibration Assessment:**
-- Pass predictions: {interp['pass_bias']}
-- Fail predictions: {interp['fail_bias']}
-
-**Interpretation:**
-- Skewness: {overall['skewness']:.4f} (0 = symmetric)
-- Kurtosis: {overall['kurtosis']:.4f} (0 = normal tails)
-
----"""
+Both classes {calibration} (mean residual {overall['mean']:.2f}). Consider Platt scaling."""
 
 
 def _report_missingness(missingness_df: pd.DataFrame) -> str:
-    """Generate missingness performance section."""
-    table = (
-        missingness_df.to_markdown(index=False)
-        if len(missingness_df) > 0
-        else "Missingness analysis not available (raw data not found)."
-    )
-    return f"""
-## Performance by Missingness
-
-{table}
-
-**Interpretation:**
-- Check if G-Mean varies significantly across missingness quartiles
-- Large drops in Q4 (high missingness) may indicate data quality issues affecting predictions
-
----"""
+    """Generate missingness performance section (skip if empty)."""
+    return ""  # Omit from concise report
 
 
 def _report_clusters(cluster_df: pd.DataFrame) -> str:
     """Generate FN cluster analysis section."""
-    table = (
-        cluster_df.to_markdown(index=False)
-        if len(cluster_df) > 0
-        else "Insufficient false negatives for clustering."
-    )
+    if len(cluster_df) == 0:
+        return ""
+
+    rows = []
+    for _, row in cluster_df.iterrows():
+        rows.append(f"| {row['cluster']} | {row['n_samples']} | {row['distinctive_features']} |")
+
+    table = "| Cluster | n | Key Features |\n|--------:|--:|--------------|\n" + "\n".join(rows)
+
     return f"""
-## False Negative Cluster Analysis
 
-{table}
+## FN Clusters
 
-**Interpretation:**
-- Clusters reveal systematic patterns in missed defects
-- Distinctive features show how each cluster differs from the overall test population
-- Consider targeted feature engineering or threshold adjustment for underperforming clusters
-
----"""
+{table}"""
 
 
 def _report_recommendations() -> str:
-    """Generate recommendations section."""
+    """Generate footer."""
     return """
-## Recommendations
-
-1. **For missed defects with low predicted probability:** These represent confident mistakes. Review SHAP waterfalls to understand which features mislead the model.
-
-2. **For calibration issues:** If predictions are overconfident/underconfident, consider Platt scaling or isotonic regression.
-
-3. **For missingness-related performance drops:** Consider missingness indicators as features or separate models for high-missingness samples.
-
-4. **For clustered failure modes:** Each cluster may represent a distinct failure mechanism. Domain experts should validate if these correspond to known process issues.
 
 ---
 
@@ -546,12 +506,13 @@ def generate_analysis_report(
     residual_analysis: dict,
     missingness_df: pd.DataFrame,
     cluster_df: pd.DataFrame,
-    metadata: dict
+    metadata: dict,
+    n_total_failures: int = 21
 ) -> None:
     """Generate markdown summary report of all analyses."""
     sections = [
         _report_header(metadata),
-        _report_misclassification(fn_df),
+        _report_misclassification(fn_df, n_total_failures),
         _report_residuals(residual_analysis),
         _report_missingness(missingness_df),
         _report_clusters(cluster_df),
@@ -604,7 +565,10 @@ def main():
     cluster_df = analyze_fn_clusters(X_test, y_test, y_pred, y_proba, feature_names)
 
     # Generate summary report
-    generate_analysis_report(fn_df, residual_analysis, missingness_df, cluster_df, metadata)
+    generate_analysis_report(
+        fn_df, residual_analysis, missingness_df, cluster_df, metadata,
+        n_total_failures=int(y_test.sum())
+    )
 
     logger.info("Analysis complete. See reports/interpretability_report.md")
 

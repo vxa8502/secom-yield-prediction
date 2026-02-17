@@ -1,4 +1,4 @@
-.PHONY: preprocess tune tune-status select analyze pipeline pipeline-quick dashboard mlflow reset test eda help
+.PHONY: preprocess tune tune-status select analyze pipeline pipeline-quick dashboard mlflow reset test eda help ci lint
 
 help:
 	@echo "SECOM Yield Prediction"
@@ -20,6 +20,8 @@ help:
 	@echo "  make mlflow        MLflow experiment UI"
 	@echo ""
 	@echo "Testing:"
+	@echo "  make ci            Run lint + tests"
+	@echo "  make lint          Run ruff linter"
 	@echo "  make test          Run unit tests"
 	@echo ""
 	@echo "Maintenance:"
@@ -81,6 +83,11 @@ mlflow:
 # Testing
 test:
 	.venv/bin/python -m pytest tests/ -v
+
+lint:
+	.venv/bin/ruff check src/ pipelines/ streamlit_app/ notebooks/eda.py
+
+ci: lint test
 
 # Maintenance
 reset:

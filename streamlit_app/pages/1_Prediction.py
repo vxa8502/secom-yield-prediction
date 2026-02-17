@@ -22,7 +22,6 @@ from streamlit_app.utils.recommendations import (
     generate_recommendations,
     SEVERITY_CONFIG,
 )
-from src.config import COLORS
 
 # Input validation constants
 MAX_CSV_SIZE_MB = 10
